@@ -1,0 +1,43 @@
+---
+title: "Ameriflux "
+output: pdf_document
+---
+
+This is an example notebook to extract Ameriflux flux tower data.
+
+First we load the AmerifluxR library, and the retrieve all sites metadata:
+```{r}
+library("amerifluxr")
+site <- amf_site_info()
+
+```
+
+
+Then we try to retrieve all BASE-BADM data for the Turkey Point tower (CA-TPD):
+```{r}
+floc2 <- amf_download_base(user_id = "rblourenco",
+                           user_email = "barroslr@mcmaster.ca",
+                           site_id = "CA-TPD",
+                           data_product = "BASE-BADM",
+                           data_policy = "CCBY4.0",
+                           agree_policy = TRUE,
+                           intended_use = "remote_sensing",
+                           intended_use_text = "validate the model of GPP estimation",
+                           verbose = TRUE,
+                           out_dir = tempdir())
+```
+
+Later we load the downloaded data:
+
+```{r}
+base <- amf_read_base(file = floc2,
+                      unzip = TRUE,
+                      parse_timestamp = TRUE)
+```
+
+And finally open for table visualization:
+
+```{r}
+View(base)
+```
+
