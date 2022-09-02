@@ -1,2 +1,2 @@
 # Ameriflux-sandbox
-Pleying with Ameriflux datasets
+Playing with Ameriflux datasets
